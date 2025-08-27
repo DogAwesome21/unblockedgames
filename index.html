@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Games Hub — Play in-page</title>
+  <title>Games Hub — Placeholder Slots</title>
   <style>
     :root{--bg:#0b1220;--panel:#0f1724;--muted:#94a3b8;--accent:#38bdf8}
     *{box-sizing:border-box}
@@ -19,27 +19,14 @@
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
     .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;transition:transform .18s,box-shadow .18s}
     .card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
-    .thumb{width:100%;height:110px;border-radius:8px;background-size:cover;background-position:center;border:1px solid rgba(255,255,255,0.03)}
+    .thumb{width:100%;height:110px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--muted)}
     .title{font-size:14px;color:#e6eef8;text-align:center}
     .meta{font-size:12px;color:var(--muted)}
 
-    footer{max-width:1200px;margin:20px auto;padding:10px 16px;color:var(--muted);font-size:13px}
-
-    /* overlay player */
-    .overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.55),rgba(2,6,23,0.85));display:flex;align-items:center;justify-content:center;padding:28px;z-index:60;backdrop-filter:blur(4px);}
-    .panel{width:100%;max-width:1100px;background:var(--panel);border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(2,6,23,0.7)}
-    .panel .head{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.03)}
-    .panel .head .left{display:flex;flex-direction:column}
-    .panel .body{height:640px;background:#020612;display:flex;align-items:center;justify-content:center}
-    .controls{margin-left:auto;display:flex;gap:8px}
-    .btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:#e6eef8;cursor:pointer}
-    .btn:hover{transform:translateY(-2px)}
-
-    /* responsive */
-    @media (max-width:720px){.panel .body{height:56vh}}
-
-    /* small helpers */
-    .muted{color:var(--muted)}
+    #overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(11,18,32,0.9);z-index:100;align-items:center;justify-content:center}
+    #playerBody{width:80%;height:80%;background:var(--panel);border-radius:12px;overflow:hidden;position:relative}
+    #closeBtn{position:absolute;top:10px;right:10px;background:var(--accent);border:none;color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer;z-index:101}
+    #openNew{position:absolute;top:10px;left:10px;background:var(--accent);border:none;color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer;z-index:101}
   </style>
 </head>
 <body>
@@ -48,7 +35,7 @@
       <div class="logo">GH</div>
       <div>
         <h1>Games Hub</h1>
-        <div class="muted" style="font-size:12px">Click a card to play — runs inside the page</div>
+        <div class="muted" style="font-size:12px">Click a card to play — placeholders</div>
       </div>
     </div>
     <nav>
@@ -60,240 +47,89 @@
 
   <main class="wrap">
     <div class="grid" id="gamesGrid">
-      <!-- Demo cards: replace/add your own -->
-      <div class="card" data-type="inline" data-game="snake">
-        <div class="thumb" style="background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'320\' height=\'180\'><rect width=\'100%\' height=\'100%\' fill=\'%230b1220\' /><text x=\'50%\' y=\'50%\' fill=\'%2338bdf8\' font-family=\'Arial\' font-size=\'22\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Snake (demo)</text></svg>');"></div>
-        <div class="title">Snake (Built-in demo)</div>
-        <div class="meta">Keyboard: arrow keys + Space to pause</div>
+      <!-- Placeholder cards -->
+      <div class="card" data-type="iframe" data-url="">
+        <div class="thumb">+</div>
+        <div class="title">Game Slot 1</div>
+        <div class="meta">Empty slot — add path or full URL</div>
       </div>
-
-    <div class="card" data-url="games/LevelDevil/index.html">
-      <div class="title">Level Devil</div>
-      <div class="meta">Survive all the tricky traps!</div>
-    </div>
-
-      <div class="card" data-type="iframe" data-url="/games/pong/index.html">
-        <div class="thumb" style="background-image:url('https://via.placeholder.com/320x180.png?text=Pong');"></div>
-        <div class="title">Pong</div>
-        <div class="meta">Or use a full URL (set data-url to https://...)</div>
+      <div class="card" data-type="iframe" data-url="">
+        <div class="thumb">+</div>
+        <div class="title">Game Slot 2</div>
+        <div class="meta">Empty slot — add path or full URL</div>
       </div>
-
-      <div class="card" id="addCard">
-        <div class="thumb" style="display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--muted);background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}">+</div>
-        <div class="title">Add your game</div>
-        <div class="meta">Drop a folder into <code>/games/&lt;slug&gt;/index.html</code></div>
+      <div class="card" data-type="iframe" data-url="">
+        <div class="thumb">+</div>
+        <div class="title">Game Slot 3</div>
+        <div class="meta">Empty slot — add path or full URL</div>
+      </div>
+      <div class="card" data-type="iframe" data-url="">
+        <div class="thumb">+</div>
+        <div class="title">Game Slot 4</div>
+        <div class="meta">Empty slot — add path or full URL</div>
       </div>
     </div>
   </main>
 
-  <footer>
-    To add games: upload a folder per game with an index.html (e.g. <code>/games/tetris/index.html</code>) or change the card's <code>data-url</code> to a full URL. If you host on GitHub Pages, place games in the repository and link to the path.
-  </footer>
-
-  <!-- overlay player (created hidden by default) -->
-  <div id="overlay" class="overlay" style="display:none">
-    <div class="panel" role="dialog" aria-modal="true" aria-label="Game player">
-      <div class="head">
-        <div class="left">
-          <div id="playerTitle">Game</div>
-          <div class="muted" id="playerMeta" style="font-size:13px">Playing inside page</div>
-        </div>
-        <div class="controls">
-          <button id="openNew" class="btn" title="Open in new tab">↗ New tab</button>
-          <button id="closeBtn" class="btn" title="Close">✕ Close</button>
-        </div>
-      </div>
-      <div class="body" id="playerBody">
-        <!-- either an iframe or an inline game canvas will be injected here -->
-        <div class="muted">Loading…</div>
-      </div>
+  <div id="overlay">
+    <div id="playerBody">
+      <button id="closeBtn">Close</button>
+      <button id="openNew">Open in new tab</button>
     </div>
   </div>
 
-  <script>
-    // Lightweight page that plays games in a modal.
-    // Built-in: a small Snake demo (runs inline). Other games: load via iframe (data-url)
+  <footer>
+    Placeholder slots for games. Add your games by updating the data-url attribute to the path or full URL.
+  </footer>
 
+  <script>
     const grid = document.getElementById('gamesGrid');
     const overlay = document.getElementById('overlay');
     const playerBody = document.getElementById('playerBody');
-    const playerTitle = document.getElementById('playerTitle');
-    const playerMeta = document.getElementById('playerMeta');
     const closeBtn = document.getElementById('closeBtn');
     const openNew = document.getElementById('openNew');
-
-    let current = { type: null, destroy: null, url: null };
+    let current = { url: null };
 
     grid.addEventListener('click', e => {
       const card = e.target.closest('.card');
       if (!card) return;
-      const type = card.dataset.type || 'iframe';
-      const url = card.dataset.url || null;
-      const game = card.dataset.game || card.querySelector('.title').textContent.trim();
-      openPlayer({ type, url, game });
+      const url = card.dataset.url;
+      if (!url) {
+        alert('No URL set for this slot. Please add a path or full URL.');
+        return;
+      }
+      openPlayer(url);
     });
 
     closeBtn.addEventListener('click', closePlayer);
-    overlay.addEventListener('click', (ev) => { if (ev.target === overlay) closePlayer(); });
+    overlay.addEventListener('click', (e) => { if(e.target === overlay) closePlayer(); });
 
-    openNew.addEventListener('click', ()=>{
-      if (current && current.url) window.open(current.url,'_blank');
+    openNew.addEventListener('click', () => {
+      if(current.url) window.open(current.url, '_blank');
     });
 
-    function openPlayer({ type, url, game }){
-      stopCurrent();
-      playerTitle.textContent = game || 'Game';
-      playerMeta.textContent = type === 'inline' ? 'Inline demo' : (url || 'External');
+    function openPlayer(url){
+      current.url = url;
       overlay.style.display = 'flex';
-      if (type === 'inline' && game && game.toLowerCase().includes('snake')){
-        // start built-in snake demo
-        current.type = 'inline-snake';
-        current.url = null;
-        current.destroy = startSnake(playerBody);
-        openNew.style.display = 'none';
-      } else if (type === 'iframe' && url){
-        // create iframe
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = '0';
-        iframe.allow = 'fullscreen';
-        playerBody.innerHTML = '';
-        playerBody.appendChild(iframe);
-        // show a loading notice and a timeout fallback if the iframe doesn't load
-        let loaded = false;
-        const wait = setTimeout(()=>{
-          if (!loaded){
-            playerBody.innerHTML = `<div style="padding:20px;color:var(--muted);text-align:center">Could not load <code>${url}</code>. Make sure the file exists and is reachable.<br><br>Tip: put your game at <code>/games/${url.replace(/.*\//,'')}/index.html</code></div>`;
-          }
-        },2500);
-        iframe.addEventListener('load', ()=>{ loaded = true; clearTimeout(wait); });
-        current.type = 'iframe';
-        current.url = url;
-        current.destroy = ()=>{ iframe.remove(); };
-        openNew.style.display = 'inline-flex';
-      } else {
-        playerBody.innerHTML = `<div style='color:var(--muted);padding:20px;text-align:center'>No playable URL found on this card. Edit the card's <code>data-url</code> attribute or place your game in <code>/games/&lt;slug&gt;/index.html</code>.</div>`;
-        openNew.style.display = 'none';
-      }
+      const iframe = document.createElement('iframe');
+      iframe.src = url;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = '0';
+      iframe.allow = 'fullscreen';
+      // remove previous iframe if any
+      const existing = playerBody.querySelector('iframe');
+      if(existing) existing.remove();
+      playerBody.appendChild(iframe);
     }
 
-    function closePlayer(){ stopCurrent(); overlay.style.display = 'none'; }
-
-    function stopCurrent(){ if (current && typeof current.destroy === 'function'){ try{ current.destroy(); }catch(e){console.error(e);} } current = { type:null, destroy:null, url:null }; playerBody.innerHTML = '<div class="muted">Loading…</div>'; }
-
-    // ---- Inline Snake demo ----
-    function startSnake(container){
-      // clear container
-      container.innerHTML = '';
-      const wrap = document.createElement('div');
-      wrap.style.width = '100%';
-      wrap.style.height = '100%';
-      wrap.style.display = 'flex';
-      wrap.style.alignItems = 'center';
-      wrap.style.justifyContent = 'center';
-      container.appendChild(wrap);
-
-      const canvas = document.createElement('canvas');
-      canvas.width = Math.min(900, window.innerWidth - 200);
-      canvas.height = Math.min(640, window.innerHeight - 200);
-      wrap.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-
-      const cell = 20;
-      const cols = Math.floor(canvas.width / cell);
-      const rows = Math.floor(canvas.height / cell);
-
-      let px = Math.floor(cols/2), py = Math.floor(rows/2);
-      let vx = 1, vy = 0;
-      let tail = [];
-      let tailLen = 4;
-      let food = {};
-      let running = true;
-      let score = 0;
-
-      placeFood();
-      draw();
-
-      function placeFood(){
-        food.x = Math.floor(Math.random()*cols);
-        food.y = Math.floor(Math.random()*rows);
-        // avoid placing on snake
-        if (tail.some(p=>p.x===food.x && p.y===food.y) || (food.x===px && food.y===py)) placeFood();
-      }
-
-      function step(){
-        px += vx; py += vy;
-        if (px < 0 || py < 0 || px >= cols || py >= rows){ return gameOver(); }
-        if (tail.some(p=>p.x===px && p.y===py)) return gameOver();
-        tail.push({x:px,y:py});
-        while (tail.length > tailLen) tail.shift();
-        if (px === food.x && py === food.y){ tailLen++; score += 10; placeFood(); }
-        draw();
-      }
-
-      function draw(){
-        // background
-        ctx.fillStyle = '#041427';
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        // grid (subtle)
-        ctx.strokeStyle = 'rgba(255,255,255,0.02)';
-        ctx.lineWidth = 1;
-        for (let x=0;x<cols;x++){ ctx.strokeRect(x*cell,0,cell,canvas.height); }
-        // food
-        ctx.fillStyle = '#fb7185';
-        ctx.fillRect(food.x*cell+2, food.y*cell+2, cell-4, cell-4);
-        // snake
-        ctx.fillStyle = '#60a5fa';
-        tail.forEach((p,i)=>{ ctx.fillRect(p.x*cell+2, p.y*cell+2, cell-4, cell-4); });
-        // score
-        ctx.fillStyle = 'rgba(255,255,255,0.9)';
-        ctx.font = '14px system-ui, Arial';
-        ctx.fillText('Score: '+score, 8, 18);
-      }
-
-      function gameOver(){
-        running = false;
-        // show game over overlay
-        const msg = document.createElement('div');
-        msg.style.position = 'absolute';
-        msg.style.color = '#fff';
-        msg.style.background = 'rgba(2,6,23,0.6)';
-        msg.style.padding = '12px 18px';
-        msg.style.borderRadius = '8px';
-        msg.style.top = '20px';
-        msg.style.left = '20px';
-        msg.textContent = 'Game Over — Score: ' + score + ' (Press R to restart)';
-        wrap.appendChild(msg);
-      }
-
-      // keyboard handling
-      function keyHandler(e){
-        if (e.key === 'ArrowLeft' && vx !== 1){ vx = -1; vy = 0; }
-        if (e.key === 'ArrowRight' && vx !== -1){ vx = 1; vy = 0; }
-        if (e.key === 'ArrowUp' && vy !== 1){ vx = 0; vy = -1; }
-        if (e.key === 'ArrowDown' && vy !== -1){ vx = 0; vy = 1; }
-        if (e.key === ' ') { // toggle pause
-          e.preventDefault();
-          if (running){ clearInterval(timer); running = false; }
-          else { timer = setInterval(step,120); running = true; }
-        }
-        if (e.key.toLowerCase() === 'r'){
-          // restart
-          px = Math.floor(cols/2); py = Math.floor(rows/2); vx = 1; vy = 0; tail = []; tailLen = 4; score = 0; placeFood(); if (!running){ timer = setInterval(step,120); running = true; }
-          wrap.querySelectorAll('div').forEach(d=>{ if (d !== canvas.parentNode) d.remove && d.remove(); });
-        }
-      }
-
-      document.addEventListener('keydown', keyHandler);
-      let timer = setInterval(step, 120);
-
-      // return destroy function
-      return function destroy(){ clearInterval(timer); document.removeEventListener('keydown', keyHandler); try{ wrap.remove(); }catch(e){} };
+    function closePlayer(){
+      const existing = playerBody.querySelector('iframe');
+      if(existing) existing.remove();
+      current.url = null;
+      overlay.style.display = 'none';
     }
-
-    // initial: nothing
   </script>
 </body>
 </html>
+
