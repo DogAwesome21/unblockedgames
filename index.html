@@ -82,10 +82,52 @@
 </head>
 <body>
 
+<!-- Fixed Top Bar -->
+<div id="topBar">
+  <button id="spanicBtn">Spanic</button>
+</div>
+
+<style>
+  /* Fixed top bar styles */
+  #topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #ff4757;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 9999; /* ensures it’s on top of everything */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  #topBar button {
+    background: white;
+    color: #ff4757;
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #topBar button:hover {
+    background: #ffe6e6;
+  }
+</style>
+
+<script>
+  // Redirect to Google Classroom when button is clicked
+  document.getElementById('spanicBtn').addEventListener('click', () => {
+    window.location.href = 'https://classroom.google.com/';
+  });
+</script>
+
 <header>Games Hub</header>
 <main>
   <div class="card" data-url="https://dogawesome21.github.io/unblockedgames/games/slope/index.html">
-    <img src="/games/slope/logo.png" alt="Slope">
+    <img src="https://dogawesome21.github.io/unblockedgames/games/slope/logo.png" alt="Slope">
     <div class="title">Slope</div>
   </div>
   <div class="card" data-url="https://example.com">
